@@ -28,6 +28,7 @@
       <a href="#skills" class="nav-link">Skills</a>
       <a href="#experience" class="nav-link">Experience</a>
       <a href="#projects" class="nav-link">Projects</a>
+      <a href="#leetcode" class="nav-link">LeetCode</a>
     </nav>
     
     <div class="nav-actions">
@@ -341,12 +342,112 @@
     </div>
   </section>
 
+  <!-- LeetCode Section -->
+  <section class="section" id="leetcode">
+    <h2 class="section-title reveal">LeetCode Profile</h2>
+    <div class="leetcode-container glass-card reveal">
+      <div class="leetcode-grid">
+        <!-- Left: Profile Info -->
+        <div class="leetcode-profile">
+          <div class="leetcode-avatar-container">
+            <img src="https://assets.leetcode.com/users/default_avatar.png" alt="LeetCode Avatar" class="leetcode-avatar" id="leetcode-avatar">
+            <div class="leetcode-brand-badge">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M13.483 0a1.374 1.374 0 0 0-.961.414l-9.777 9.778a1.375 1.375 0 0 0 0 1.942l1.942 1.942a1.375 1.375 0 0 0 1.943 0l9.777-9.777a1.375 1.375 0 0 0 0-1.942L14.444.414A1.375 1.375 0 0 0 13.483 0zm-6.283 9.585L.239 16.547a1.375 1.375 0 0 0 0 1.942l1.942 1.942a1.375 1.375 0 0 0 1.943 0l6.971-6.97a1.375 1.375 0 0 0 0-1.943L9.153 9.585a1.375 1.375 0 0 0-1.953 0zm10.254.414a1.375 1.375 0 0 0-1.943 0L8.54 16.97a1.375 1.375 0 0 0 0 1.942l1.942 1.942a1.375 1.375 0 0 0 1.943 0l6.971-6.97a1.375 1.375 0 0 0 0-1.943l-1.942-1.942a1.375 1.375 0 0 0-.962-.414z"/>
+              </svg>
+            </div>
+          </div>
+          <div class="leetcode-user-info">
+            <h3 id="leetcode-name">Thaaranyaashree S</h3>
+            <a href="https://leetcode.com/u/Thaara06/" target="_blank" class="leetcode-username">@Thaara06 <i class="fas fa-external-link-alt"></i></a>
+            <div class="leetcode-badge-container">
+              <span class="leetcode-badge" id="leetcode-rank-badge"><i class="fas fa-trophy"></i> Rank: 346,295</span>
+              <span class="leetcode-badge"><i class="fas fa-map-marker-alt"></i> India</span>
+            </div>
+            <div class="sync-status" id="leetcode-sync-status">
+              <span class="status-dot"></span> <span class="status-text">Connecting...</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Center/Right: Solved Stats -->
+        <div class="leetcode-stats-content">
+          <!-- Circular Progress -->
+          <div class="leetcode-radial-box">
+            <div class="leetcode-radial">
+              <svg class="radial-svg" viewBox="0 0 120 120">
+                <circle class="radial-bg" cx="60" cy="60" r="54" />
+                <circle class="radial-progress" id="leetcode-progress-circle" cx="60" cy="60" r="54" style="stroke-dasharray: 339.292; stroke-dashoffset: 339.292;" />
+              </svg>
+              <div class="radial-center">
+                <span class="solved-count" id="leetcode-solved-count">0</span>
+                <span class="total-count">Solved</span>
+              </div>
+            </div>
+            <div class="acceptance-rate-box">
+              <span class="label">Acceptance</span>
+              <span class="value" id="leetcode-acceptance">--</span>
+            </div>
+          </div>
+
+          <!-- Difficulty Breakdown -->
+          <div class="leetcode-difficulty-breakdown">
+            <!-- Easy -->
+            <div class="difficulty-item">
+              <div class="difficulty-meta">
+                <span class="diff-title easy">Easy</span>
+                <span class="diff-nums"><span id="leetcode-easy-solved">0</span><span class="diff-slash">/</span><span class="diff-total" id="leetcode-easy-total">--</span></span>
+              </div>
+              <div class="diff-bar-bg">
+                <div class="diff-bar-fill easy" id="leetcode-easy-bar" style="width: 0%"></div>
+              </div>
+            </div>
+
+            <!-- Medium -->
+            <div class="difficulty-item">
+              <div class="difficulty-meta">
+                <span class="diff-title medium">Medium</span>
+                <span class="diff-nums"><span id="leetcode-medium-solved">0</span><span class="diff-slash">/</span><span class="diff-total" id="leetcode-medium-total">--</span></span>
+              </div>
+              <div class="diff-bar-bg">
+                <div class="diff-bar-fill medium" id="leetcode-medium-bar" style="width: 0%"></div>
+              </div>
+            </div>
+
+            <!-- Hard -->
+            <div class="difficulty-item">
+              <div class="difficulty-meta">
+                <span class="diff-title hard">Hard</span>
+                <span class="diff-nums"><span id="leetcode-hard-solved">0</span><span class="diff-slash">/</span><span class="diff-total" id="leetcode-hard-total">--</span></span>
+              </div>
+              <div class="diff-bar-bg">
+                <div class="diff-bar-fill hard" id="leetcode-hard-bar" style="width: 0%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Footer Button -->
+      <div class="leetcode-cta">
+        <a href="https://leetcode.com/u/Thaara06/" target="_blank" class="btn btn-primary">
+          View Profile on LeetCode <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- Footer Section -->
   <footer>
     <div class="footer-socials">
       <a href="mailto:thaaranyaashree@gmail.com" class="footer-social-link" title="Email"><i class="fas fa-envelope"></i></a>
       <a href="https://www.linkedin.com/in/thaaranyaashree-s-8b38212a3" target="_blank" class="footer-social-link" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
       <a href="https://github.com/thaaranyaashree-s-8b38212a3" target="_blank" class="footer-social-link" title="GitHub"><i class="fab fa-github"></i></a>
+      <a href="https://leetcode.com/u/Thaara06/" target="_blank" class="footer-social-link" title="LeetCode" aria-label="LeetCode">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" style="vertical-align: middle;">
+          <path d="M13.483 0a1.374 1.374 0 0 0-.961.414l-9.777 9.778a1.375 1.375 0 0 0 0 1.942l1.942 1.942a1.375 1.375 0 0 0 1.943 0l9.777-9.777a1.375 1.375 0 0 0 0-1.942L14.444.414A1.375 1.375 0 0 0 13.483 0zm-6.283 9.585L.239 16.547a1.375 1.375 0 0 0 0 1.942l1.942 1.942a1.375 1.375 0 0 0 1.943 0l6.971-6.97a1.375 1.375 0 0 0 0-1.943L9.153 9.585a1.375 1.375 0 0 0-1.953 0zm10.254.414a1.375 1.375 0 0 0-1.943 0L8.54 16.97a1.375 1.375 0 0 0 0 1.942l1.942 1.942a1.375 1.375 0 0 0 1.943 0l6.971-6.97a1.375 1.375 0 0 0 0-1.943l-1.942-1.942a1.375 1.375 0 0 0-.962-.414z"/>
+        </svg>
+      </a>
     </div>
     <div class="footer-copy">
       &copy; 2026 Thaaranyaashree S. Built with passion & vanilla code.
