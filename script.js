@@ -5,7 +5,10 @@ document.addEventListener('DOMContentLoaded', () => {
   initActiveNavLinkOnScroll();
   initTypewriter();
   initScrollReveal();
+<<<<<<< HEAD
   initLeetCodeStats();
+=======
+>>>>>>> a3f35ad0268b70b115bce943fd1f188bf0ce0c28
 });
 
 /* Theme Toggle Logic */
@@ -204,6 +207,7 @@ function showToast(message, type = 'success') {
     }, 400);
   }, 4000);
 }
+<<<<<<< HEAD
 
 /* LeetCode Dynamic Stats Integration */
 function initLeetCodeStats() {
@@ -354,3 +358,5 @@ function initLeetCodeStats() {
     }
   }
 }
+=======
+>>>>>>> a3f35ad0268b70b115bce943fd1f188bf0ce0c28
