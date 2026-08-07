@@ -26,9 +26,10 @@
       <a href="#home" class="nav-link active">Home</a>
       <a href="#about" class="nav-link">About</a>
       <a href="#skills" class="nav-link">Skills</a>
-      <a href="#experience" class="nav-link">Experience</a>
+      <a href="#experience" class="nav-link">Achievements</a>
       <a href="#projects" class="nav-link">Projects</a>
       <a href="#leetcode" class="nav-link">LeetCode</a>
+      <a href="#resume" class="nav-link">Resume</a>
     </nav>
     
     <div class="nav-actions">
@@ -48,103 +49,241 @@
 
   <!-- Hero Section -->
   <section class="section hero" id="home">
+    <!-- Left: Content -->
     <div class="hero-content reveal">
-      <div class="hero-subtitle">Welcome to my universe</div>
-      <h1 class="hero-title">Hi, I'm <span class="gradient-text">Thaaranyaashree S</span></h1>
+      <div class="hero-greeting">Hello, I'm</div>
+      <h1 class="hero-name">
+        <span class="name-line1">THAARANYA</span>
+        <span class="name-line2">SHREE</span>
+      </h1>
+      <div class="hero-roles">GenAI Engineer &nbsp;|&nbsp; ML Enthusiast &nbsp;|&nbsp; Python &amp; Java Developer</div>
       <div class="hero-typing">
-        I am a <span id="typed-text"></span><span class="typed-cursor">|</span>
+        <span id="typed-text"></span><span class="typed-cursor">|</span>
       </div>
       <p class="hero-desc">
-        Enthusiastic and motivated Computer Science Engineering graduate with strong foundational knowledge in Data Science, Machine Learning, and Web Development. Dedicated to building impactful intelligence and scalable web systems.
+        Passionate about building intelligent solutions using AI &amp; modern technologies. Dedicated to turning raw data into impactful, scalable web systems.
       </p>
       <div class="hero-btns">
-        <a href="mailto:thaaranyaashree@gmail.com" class="btn btn-primary">Contact Me <i class="fas fa-envelope"></i></a>
-        <a href="#projects" class="btn btn-secondary">Explore Projects</a>
+        <a href="#projects" class="btn btn-primary">View My Projects <i class="fas fa-arrow-right"></i></a>
+        <a href="#resume" class="btn btn-secondary"><i class="fas fa-download"></i> Download Resume</a>
+      </div>
+
+      <!-- Social Links -->
+      <div class="hero-socials">
+        <a href="https://github.com/thaaranyaashree-s-8b38212a3" target="_blank" class="hero-social-link" title="GitHub" aria-label="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/thaaranyaashree-s-8b38212a3" target="_blank" class="hero-social-link" title="LinkedIn" aria-label="LinkedIn">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+        <a href="https://leetcode.com/u/Thaara06/" target="_blank" class="hero-social-link" title="LeetCode" aria-label="LeetCode">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M13.483 0a1.374 1.374 0 0 0-.961.414l-9.777 9.778a1.375 1.375 0 0 0 0 1.942l1.942 1.942a1.375 1.375 0 0 0 1.943 0l9.777-9.777a1.375 1.375 0 0 0 0-1.942L14.444.414A1.375 1.375 0 0 0 13.483 0zm-6.283 9.585L.239 16.547a1.375 1.375 0 0 0 0 1.942l1.942 1.942a1.375 1.375 0 0 0 1.943 0l6.971-6.97a1.375 1.375 0 0 0 0-1.943L9.153 9.585a1.375 1.375 0 0 0-1.953 0zm10.254.414a1.375 1.375 0 0 0-1.943 0L8.54 16.97a1.375 1.375 0 0 0 0 1.942l1.942 1.942a1.375 1.375 0 0 0 1.943 0l6.971-6.97a1.375 1.375 0 0 0 0-1.943l-1.942-1.942a1.375 1.375 0 0 0-.962-.414z"/>
+          </svg>
+        </a>
+        <a href="mailto:thaaranyaashree@gmail.com" class="hero-social-link" title="Email" aria-label="Email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </div>
+
+      <!-- Stats Bar -->
+      <div class="hero-stats">
+        <div class="hero-stat-item">
+          <div class="hero-stat-number">10+</div>
+          <div class="hero-stat-label">Projects<br>Completed</div>
+        </div>
+        <div class="hero-stat-item">
+          <div class="hero-stat-number">250+</div>
+          <div class="hero-stat-label">LeetCode<br>Problems Solved</div>
+        </div>
+        <div class="hero-stat-item">
+          <div class="hero-stat-number">5+</div>
+          <div class="hero-stat-label">Certifications<br>Earned</div>
+        </div>
+        <div class="hero-stat-item">
+          <div class="hero-stat-number">2+</div>
+          <div class="hero-stat-label">Years of<br>Learning</div>
+        </div>
       </div>
     </div>
-    
+
+    <!-- Right: Profile Photo Frame -->
     <div class="hero-visual reveal">
-      <div class="tech-graphic">
-        <div class="circle-outer"></div>
-        <div class="circle-inner"></div>
-        <div class="graphic-center">
-          <i class="fas fa-brain"></i>
+      <div class="profile-frame-wrapper">
+        <div class="profile-ring-outer"></div>
+        <div class="profile-ring-inner"></div>
+        <div class="orbit-dot orbit-dot-1"></div>
+        <div class="orbit-dot orbit-dot-2"></div>
+        <div class="orbit-dot orbit-dot-3"></div>
+        <div class="profile-photo-circle">
+          <img src="profile.jpg" alt="Thaaranyaashree S - Professional Photo" />
         </div>
-        <div class="floating-node node-1" title="Machine Learning">
-          <i class="fas fa-network-wired"></i>
+        <div class="floating-badge badge-ml">
+          <i class="fas fa-network-wired"></i> AI / ML
         </div>
-        <div class="floating-node node-2" title="Full-Stack Web">
-          <i class="fas fa-code"></i>
+        <div class="floating-badge badge-web">
+          <i class="fas fa-code"></i> Full-Stack
         </div>
-        <div class="floating-node node-3" title="Data Visualization">
-          <i class="fas fa-chart-bar"></i>
+        <div class="floating-badge badge-data">
+          <i class="fas fa-chart-bar"></i> Data
         </div>
       </div>
     </div>
   </section>
 
-  <!-- About & Education Section -->
+  <!-- About Section (Layout Matched to Image 2) -->
   <section class="section" id="about">
+    <div class="section-subtitle-tag">GET TO KNOW ME</div>
     <h2 class="section-title reveal">About Me</h2>
-    <div class="about-container">
-      <div class="about-summary glass-card reveal">
-        <h3 style="font-size: 1.5rem; margin-bottom: 15px;">Who I Am</h3>
-        <p>
-          I am a Computer Science Engineering graduate aiming to grow as a professional Full-Stack AI/ML Engineer. My foundation is built at the intersection of complex data modeling and application development.
-        </p>
-        <p>
-          I thrive on turning raw datasets into actionable insights and designing full-stack solutions that simplify experiences. I am seeking a challenging opportunity to apply my skill sets, grow continuously, and contribute to next-generation tech architectures.
-        </p>
-        <div class="quick-stats">
-          <div class="stat-item">
-            <div class="stat-number">2+</div>
-            <div class="stat-label">Key ML/Web Projects</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-number">8.45</div>
-            <div class="stat-label">B.E. CGPA</div>
-          </div>
-        </div>
+
+    <div class="about-top-grid">
+      <!-- Left Photo Card -->
+      <div class="about-photo-card glass-card reveal">
+        <img src="profile.jpg" alt="Thaaranyaashree S" class="about-profile-img" />
       </div>
-      
-      <div class="about-education glass-card reveal">
-        <h3><i class="fas fa-graduation-cap"></i> Education</h3>
-        <div class="timeline">
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-header">
-              <h4 class="timeline-title">Bachelor of Engineering – Computer Science Engineering</h4>
-              <span class="timeline-date">Sep 2023 - May 2027</span>
+
+      <!-- Right Details -->
+      <div class="about-details-content glass-card reveal">
+        <p class="about-lead-text">
+          I'm a passionate and curious developer with a strong foundation in Computer Science Engineering and expertise in Machine Learning, Generative AI, and Web Development.
+        </p>
+        <p class="about-body-text">
+          I love turning ideas into real-world solutions that create impact, bridging data modeling with scalable user experiences.
+        </p>
+        
+        <div class="about-info-grid">
+          <div class="info-item">
+            <div class="info-icon"><i class="fas fa-user"></i></div>
+            <div>
+              <span class="info-label">Name</span>
+              <h4 class="info-value">Thaaranya Shree</h4>
             </div>
-            <p class="timeline-institution">Nandha Engineering College, Erode</p>
-            <p class="timeline-desc">Fostering deep concepts in algorithms, web development, data analysis, and databases. Currently maintaining a high academic standing with a **CGPA of 8.45**.</p>
           </div>
-          
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-header">
-              <h4 class="timeline-title">HSC (Higher Secondary Certificate)</h4>
-              <span class="timeline-date">Jun 2022 - Apr 2023</span>
+
+          <div class="info-item">
+            <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div>
+              <span class="info-label">Location</span>
+              <h4 class="info-value">Erode, Tamil Nadu, India</h4>
             </div>
-            <p class="timeline-institution">Kamban Kalvi Nilaiyam, Gobichettipalayam</p>
-            <p class="timeline-desc">Completed high school education with a focus on Computer Science, Mathematics, and Physics, securing a score of **87.67%**.</p>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon"><i class="fas fa-envelope"></i></div>
+            <div>
+              <span class="info-label">Email</span>
+              <h4 class="info-value">thaaranyaashree@gmail.com</h4>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon"><i class="fas fa-briefcase"></i></div>
+            <div>
+              <span class="info-label">Availability</span>
+              <h4 class="info-value">Open to Opportunities</h4>
+            </div>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- Education & Interests Cards (Matched to Image 2 Bottom Layout) -->
+    <div class="about-bottom-cards">
+      <!-- Education Card -->
+      <div class="education-card glass-card reveal">
+        <div class="card-header">
+          <div class="card-header-icon orange-icon"><i class="fas fa-graduation-cap"></i></div>
+          <h3>Education</h3>
+        </div>
+        <div class="education-content">
+          <h4 class="edu-degree">B.E. Computer Science and Engineering</h4>
+          <p class="edu-institution">Nandha Engineering College, Erode</p>
+          <div class="edu-cgpa-badge">CGPA: 8.45/10</div>
+        </div>
+      </div>
+
+      <!-- Interests Card -->
+      <div class="interests-card glass-card reveal">
+        <div class="card-header">
+          <div class="card-header-icon blue-icon"><i class="fas fa-star"></i></div>
+          <h3>Interests</h3>
+        </div>
+        <div class="interests-grid">
+          <div class="interest-item">
+            <div class="interest-icon-circle"><i class="fas fa-brain"></i></div>
+            <span>AI Research</span>
+          </div>
+
+          <div class="interest-item">
+            <div class="interest-icon-circle"><i class="fas fa-bullseye"></i></div>
+            <span>Problem Solving</span>
+          </div>
+
+          <div class="interest-item">
+            <div class="interest-icon-circle"><i class="fas fa-book-open"></i></div>
+            <span>Reading</span>
+          </div>
+
+          <div class="interest-item">
+            <div class="interest-icon-circle"><i class="fas fa-palette"></i></div>
+            <span>Designing</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Find Me Strip -->
+    <div class="find-me-strip reveal">
+      <span class="find-me-label">Find me:</span>
+      <div class="find-me-links">
+        <a href="https://www.linkedin.com/in/thaaranyaashree-s-8b38212a3" target="_blank" class="find-me-btn linkedin-btn" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="mailto:thaaranyaashree@gmail.com" class="find-me-btn email-btn" title="Email"><i class="fas fa-envelope"></i></a>
+      </div>
+    </div>
   </section>
 
-  <!-- Skills Section -->
+  <!-- Skills Section (Image 1 Layout: Skills & Expertise) -->
   <section class="section" id="skills">
-    <h2 class="section-title reveal">Technical Skills</h2>
-    <div class="skills-grid reveal">
+    <div class="section-subtitle-tag">WHAT I DO</div>
+    <h2 class="section-title reveal">Skills &amp; Expertise</h2>
+    
+    <!-- Highlights Cards -->
+    <div class="skills-highlight-row reveal">
+      <div class="skill-highlight-card glass-card">
+        <div class="skill-hl-icon"><i class="fas fa-microchip"></i></div>
+        <span>Machine Learning</span>
+      </div>
+
+      <div class="skill-highlight-card glass-card">
+        <div class="skill-hl-icon"><i class="fas fa-brain"></i></div>
+        <span>Generative AI</span>
+      </div>
+
+      <div class="skill-highlight-card glass-card">
+        <div class="skill-hl-icon"><i class="fab fa-java"></i></div>
+        <span>Java Development</span>
+      </div>
+
+      <div class="skill-highlight-card glass-card">
+        <div class="skill-hl-icon"><i class="fas fa-code"></i></div>
+        <span>Web Development</span>
+      </div>
+
+      <div class="skill-highlight-card glass-card">
+        <div class="skill-hl-icon"><i class="fas fa-lightbulb"></i></div>
+        <span>Problem Solving</span>
+      </div>
+    </div>
+
+    <!-- Detailed Progress Bars -->
+    <div class="skills-grid reveal" style="margin-top: 40px;">
       <!-- Skill Category: AI/ML -->
       <div class="skill-category glass-card">
         <h3><i class="fas fa-network-wired"></i> Machine Learning</h3>
         <div class="skills-list">
           <div class="skill-item">
             <div class="skill-info">
-              <span class="skill-name">Machine Learning Basics</span>
+              <span class="skill-name">Machine Learning &amp; GenAI</span>
               <span class="skill-pct">85%</span>
             </div>
             <div class="skill-bar-bg">
@@ -153,7 +292,7 @@
           </div>
           <div class="skill-item">
             <div class="skill-info">
-              <span class="skill-name">Data Visualization</span>
+              <span class="skill-name">Data Visualization &amp; NLP</span>
               <span class="skill-pct">80%</span>
             </div>
             <div class="skill-bar-bg">
@@ -163,13 +302,13 @@
         </div>
       </div>
 
-      <!-- Skill Category: Languages & Programming -->
+      <!-- Skill Category: Programming -->
       <div class="skill-category glass-card">
         <h3><i class="fab fa-python"></i> Programming &amp; Data</h3>
         <div class="skills-list">
           <div class="skill-item">
             <div class="skill-info">
-              <span class="skill-name">Python Programming</span>
+              <span class="skill-name">Python &amp; Java</span>
               <span class="skill-pct">90%</span>
             </div>
             <div class="skill-bar-bg">
@@ -178,7 +317,7 @@
           </div>
           <div class="skill-item">
             <div class="skill-info">
-              <span class="skill-name">Data Analysis</span>
+              <span class="skill-name">Data Analysis &amp; Pandas</span>
               <span class="skill-pct">85%</span>
             </div>
             <div class="skill-bar-bg">
@@ -194,7 +333,7 @@
         <div class="skills-list">
           <div class="skill-item">
             <div class="skill-info">
-              <span class="skill-name">Full-Stack Development</span>
+              <span class="skill-name">Full-Stack (HTML/CSS/JS/Node)</span>
               <span class="skill-pct">75%</span>
             </div>
             <div class="skill-bar-bg">
@@ -215,11 +354,11 @@
 
       <!-- Skill Category: Tools & Languages -->
       <div class="skill-category glass-card">
-        <h3><i class="fas fa-tools"></i> Other &amp; Languages</h3>
+        <h3><i class="fas fa-tools"></i> Tools &amp; Languages</h3>
         <div class="skills-list">
           <div class="skill-item">
             <div class="skill-info">
-              <span class="skill-name">Excel &amp; Google Sheets</span>
+              <span class="skill-name">Excel &amp; VS Code</span>
               <span class="skill-pct">85%</span>
             </div>
             <div class="skill-bar-bg">
@@ -228,7 +367,7 @@
           </div>
           <div class="skill-item">
             <div class="skill-info">
-              <span class="skill-name">Languages (English &amp; Tamil)</span>
+              <span class="skill-name">English &amp; Tamil</span>
               <span class="skill-pct">95%</span>
             </div>
             <div class="skill-bar-bg">
@@ -240,12 +379,12 @@
     </div>
   </section>
 
-  <!-- Experience & Projects Section -->
+  <!-- Experience & Internship Section -->
   <section class="section" id="experience">
-    <h2 class="section-title reveal">Internship &amp; Projects</h2>
+    <div class="section-subtitle-tag">EXPERIENCE</div>
+    <h2 class="section-title reveal">Internship &amp; Achievements</h2>
     
     <div class="experience-layout">
-      <!-- Internship Experience -->
       <div class="internship-box glass-card reveal">
         <div class="intern-header">
           <div>
@@ -260,97 +399,130 @@
           <li>Prepared comprehensive technical reports and dynamic visual dashboards using Python visualization toolkits to communicate model metrics.</li>
         </ul>
       </div>
+    </div>
+  </section>
 
-      <!-- Projects Grid -->
-      <div class="projects-container" id="projects">
-        <h3 style="font-size: 1.8rem; margin-bottom: 30px; text-align: center;" class="reveal">Featured Projects</h3>
-        <div class="projects-grid">
-          <!-- Project 1: Fake News Detection -->
-          <div class="project-card glass-card reveal">
-            <div class="project-banner project-banner-fake-news">
-              <i class="fas fa-newspaper"></i>
-            </div>
-            <div class="project-content">
-              <h4 class="project-title">Fake News Detection using Machine Learning</h4>
-              <p class="project-desc">
-                Developed a machine learning text-classifier to distinguish between fake news and true reports. Preprocessed NLP data and compared standard models against state-of-the-art transformer approaches.
-              </p>
-              <div class="project-tags">
-                <span class="project-tag">Python</span>
-                <span class="project-tag">LIAR Dataset</span>
-                <span class="project-tag">Logistic Regression</span>
-                <span class="project-tag">BERT Transformers</span>
-              </div>
-              <div class="project-links">
-                <a href="https://github.com/thaaranyaashree-s-8b38212a3" target="_blank" class="project-link">
-                  <i class="fab fa-github"></i> Source Code
-                </a>
-              </div>
-            </div>
+  <!-- Projects Section (Image 4 Layout: Filter Tabs + Card Grid) -->
+  <section class="section" id="projects">
+    <div class="section-subtitle-tag">MY WORK</div>
+    <h2 class="section-title reveal">Project Portfolio</h2>
+
+    <!-- Category Filter Tabs -->
+    <div class="project-filter-tabs reveal">
+      <button class="filter-tab active" data-filter="all">All</button>
+      <button class="filter-tab" data-filter="ml-ai">ML / AI</button>
+      <button class="filter-tab" data-filter="web">Web Development</button>
+      <button class="filter-tab" data-filter="other">Other</button>
+    </div>
+
+    <!-- Projects Grid -->
+    <div class="projects-grid">
+      <!-- Project 1: Legal Document Summarizer -->
+      <div class="project-card glass-card reveal" data-category="ml-ai">
+        <div class="project-banner project-banner-legal-doc">
+          <i class="fas fa-file-contract"></i>
+          <span class="project-category-chip genai-chip">GenAI</span>
+        </div>
+        <div class="project-content">
+          <h4 class="project-title">Legal Document Summarizer</h4>
+          <p class="project-desc">
+            AI-powered web application that summarizes legal documents using LLM and Retrieval Augmented Generation (RAG). Digest long contracts and highlight key clauses.
+          </p>
+          <div class="project-tags">
+            <span class="project-tag">Python</span>
+            <span class="project-tag">LangChain</span>
+            <span class="project-tag">OpenAI</span>
+            <span class="project-tag">FAISS</span>
           </div>
-
-          <!-- Project 2: Supermarket Portal -->
-          <div class="project-card glass-card reveal">
-            <div class="project-banner project-banner-supermarket">
-              <i class="fas fa-shopping-cart"></i>
-            </div>
-            <div class="project-content">
-              <h4 class="project-title">Supermarket Portal using Full-Stack</h4>
-              <p class="project-desc">
-                Designed a full-stack platform optimizing customer grocery shopping journeys. It map out products to their respective rack coordinates, reducing shopping overhead and optimizing floor inventory search.
-              </p>
-              <div class="project-tags">
-                <span class="project-tag">HTML5 / CSS3</span>
-                <span class="project-tag">JavaScript (ES6)</span>
-                <span class="project-tag">Node.js</span>
-                <span class="project-tag">Database Integration</span>
-              </div>
-              <div class="project-links">
-                <a href="https://github.com/thaaranyaashree-s-8b38212a3" target="_blank" class="project-link">
-                  <i class="fab fa-github"></i> Source Code
-                </a>
-              </div>
-            </div>
+          <div class="project-links">
+            <a href="https://github.com/thaaranyaashree-s-8b38212a3" target="_blank" class="project-link" title="Source Code">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="https://github.com/thaaranyaashree-s-8b38212a3" target="_blank" class="project-link" title="External Link">
+              <i class="fas fa-external-link-alt"></i>
+            </a>
           </div>
+        </div>
+      </div>
 
-          <!-- Project 3: Legal Document Summarizer -->
-          <div class="project-card glass-card reveal">
-            <div class="project-banner project-banner-legal-doc">
-              <i class="fas fa-file-contract"></i>
-            </div>
-            <div class="project-content">
-              <h4 class="project-title">Legal Document Summarizer</h4>
-              <p class="project-desc">
-                Developed an NLP pipeline to automatically digest, clean, and summarize long-form legal agreements and contracts. Utilized fine-tuned LLMs and encoder-decoder models to produce concise summaries highlighting key clauses and liabilities.
-              </p>
-              <div class="project-tags">
-                <span class="project-tag">Python</span>
-                <span class="project-tag">NLP</span>
-                <span class="project-tag">Hugging Face</span>
-                <span class="project-tag">BART / Pegasus</span>
-                <span class="project-tag">PyTorch</span>
-              </div>
-              <div class="project-links">
-                <a href="https://github.com/thaaranyaashree-s-8b38212a3" target="_blank" class="project-link">
-                  <i class="fab fa-github"></i> Source Code
-                </a>
-              </div>
-            </div>
+      <!-- Project 2: Fake News Detection / Crop Recommendation -->
+      <div class="project-card glass-card reveal" data-category="ml-ai">
+        <div class="project-banner project-banner-fake-news">
+          <i class="fas fa-newspaper"></i>
+          <span class="project-category-chip ml-chip">ML</span>
+        </div>
+        <div class="project-content">
+          <h4 class="project-title">Fake News Detection using ML</h4>
+          <p class="project-desc">
+            ML model that classifies news articles as fake or real using NLP preprocessing, Logistic Regression, and BERT Transformers.
+          </p>
+          <div class="project-tags">
+            <span class="project-tag">Python</span>
+            <span class="project-tag">Scikit-learn</span>
+            <span class="project-tag">Pandas</span>
+            <span class="project-tag">Seaborn</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/thaaranyaashree-s-8b38212a3" target="_blank" class="project-link" title="Source Code">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="https://github.com/thaaranyaashree-s-8b38212a3" target="_blank" class="project-link" title="External Link">
+              <i class="fas fa-external-link-alt"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 3: Supermarket Website -->
+      <div class="project-card glass-card reveal" data-category="web">
+        <div class="project-banner project-banner-supermarket">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="project-category-chip web-chip">Web</span>
+        </div>
+        <div class="project-content">
+          <h4 class="project-title">INNOMART – Supermarket Website</h4>
+          <p class="project-desc">
+            Full-stack supermarket website with cart, orders, feedback, and rack coordinate product mapping for optimized store inventory search.
+          </p>
+          <div class="project-tags">
+            <span class="project-tag">HTML5 / CSS3</span>
+            <span class="project-tag">JavaScript</span>
+            <span class="project-tag">Node.js</span>
+            <span class="project-tag">Express</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/thaaranyaashree-s-8b38212a3" target="_blank" class="project-link" title="Source Code">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="https://github.com/thaaranyaashree-s-8b38212a3" target="_blank" class="project-link" title="External Link">
+              <i class="fas fa-external-link-alt"></i>
+            </a>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- Find Me Strip -->
+    <div class="find-me-strip reveal">
+      <span class="find-me-label">Find me:</span>
+      <div class="find-me-links">
+        <a href="https://www.linkedin.com/in/thaaranyaashree-s-8b38212a3" target="_blank" class="find-me-btn linkedin-btn" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="mailto:thaaranyaashree@gmail.com" class="find-me-btn email-btn" title="Email"><i class="fas fa-envelope"></i></a>
+      </div>
+    </div>
   </section>
 
-  <!-- LeetCode Section -->
+  <!-- LeetCode Section (Image 3 Layout: Stats Dashboard + Badges Row) -->
   <section class="section" id="leetcode">
+    <div class="section-subtitle-tag">CODING PROFILE</div>
     <h2 class="section-title reveal">LeetCode Profile</h2>
+
     <div class="leetcode-container glass-card reveal">
       <div class="leetcode-grid">
         <!-- Left: Profile Info -->
         <div class="leetcode-profile">
           <div class="leetcode-avatar-container">
-            <img src="https://assets.leetcode.com/users/default_avatar.png" alt="LeetCode Avatar" class="leetcode-avatar" id="leetcode-avatar">
+            <img src="https://assets.leetcode.com/users/Thaara06/avatar_1758620144.png" alt="LeetCode Avatar" class="leetcode-avatar" id="leetcode-avatar">
             <div class="leetcode-brand-badge">
               <svg viewBox="0 0 24 24" fill="currentColor">
                 <path d="M13.483 0a1.374 1.374 0 0 0-.961.414l-9.777 9.778a1.375 1.375 0 0 0 0 1.942l1.942 1.942a1.375 1.375 0 0 0 1.943 0l9.777-9.777a1.375 1.375 0 0 0 0-1.942L14.444.414A1.375 1.375 0 0 0 13.483 0zm-6.283 9.585L.239 16.547a1.375 1.375 0 0 0 0 1.942l1.942 1.942a1.375 1.375 0 0 0 1.943 0l6.971-6.97a1.375 1.375 0 0 0 0-1.943L9.153 9.585a1.375 1.375 0 0 0-1.953 0zm10.254.414a1.375 1.375 0 0 0-1.943 0L8.54 16.97a1.375 1.375 0 0 0 0 1.942l1.942 1.942a1.375 1.375 0 0 0 1.943 0l6.971-6.97a1.375 1.375 0 0 0 0-1.943l-1.942-1.942a1.375 1.375 0 0 0-.962-.414z"/>
@@ -358,14 +530,14 @@
             </div>
           </div>
           <div class="leetcode-user-info">
-            <h3 id="leetcode-name">Thaaranyaashree S</h3>
+            <h3 id="leetcode-name">Thaaranyaashree</h3>
             <a href="https://leetcode.com/u/Thaara06/" target="_blank" class="leetcode-username">@Thaara06 <i class="fas fa-external-link-alt"></i></a>
             <div class="leetcode-badge-container">
               <span class="leetcode-badge" id="leetcode-rank-badge"><i class="fas fa-trophy"></i> Rank: 346,295</span>
               <span class="leetcode-badge"><i class="fas fa-map-marker-alt"></i> India</span>
             </div>
             <div class="sync-status" id="leetcode-sync-status">
-              <span class="status-dot"></span> <span class="status-text">Connecting...</span>
+              <span class="status-dot"></span> <span class="status-text">Live Sync</span>
             </div>
           </div>
         </div>
@@ -377,16 +549,16 @@
             <div class="leetcode-radial">
               <svg class="radial-svg" viewBox="0 0 120 120">
                 <circle class="radial-bg" cx="60" cy="60" r="54" />
-                <circle class="radial-progress" id="leetcode-progress-circle" cx="60" cy="60" r="54" style="stroke-dasharray: 339.292; stroke-dashoffset: 339.292;" />
+                <circle class="radial-progress" id="leetcode-progress-circle" cx="60" cy="60" r="54" style="stroke-dasharray: 339.292; stroke-dashoffset: 200;" />
               </svg>
               <div class="radial-center">
-                <span class="solved-count" id="leetcode-solved-count">0</span>
+                <span class="solved-count" id="leetcode-solved-count">371</span>
                 <span class="total-count">Solved</span>
               </div>
             </div>
             <div class="acceptance-rate-box">
               <span class="label">Acceptance</span>
-              <span class="value" id="leetcode-acceptance">--</span>
+              <span class="value" id="leetcode-acceptance">59.0%</span>
             </div>
           </div>
 
@@ -396,10 +568,10 @@
             <div class="difficulty-item">
               <div class="difficulty-meta">
                 <span class="diff-title easy">Easy</span>
-                <span class="diff-nums"><span id="leetcode-easy-solved">0</span><span class="diff-slash">/</span><span class="diff-total" id="leetcode-easy-total">--</span></span>
+                <span class="diff-nums"><span id="leetcode-easy-solved">297</span><span class="diff-slash">/</span><span class="diff-total" id="leetcode-easy-total">830</span></span>
               </div>
               <div class="diff-bar-bg">
-                <div class="diff-bar-fill easy" id="leetcode-easy-bar" style="width: 0%"></div>
+                <div class="diff-bar-fill easy" id="leetcode-easy-bar" style="width: 35.7%"></div>
               </div>
             </div>
 
@@ -407,10 +579,10 @@
             <div class="difficulty-item">
               <div class="difficulty-meta">
                 <span class="diff-title medium">Medium</span>
-                <span class="diff-nums"><span id="leetcode-medium-solved">0</span><span class="diff-slash">/</span><span class="diff-total" id="leetcode-medium-total">--</span></span>
+                <span class="diff-nums"><span id="leetcode-medium-solved">71</span><span class="diff-slash">/</span><span class="diff-total" id="leetcode-medium-total">1720</span></span>
               </div>
               <div class="diff-bar-bg">
-                <div class="diff-bar-fill medium" id="leetcode-medium-bar" style="width: 0%"></div>
+                <div class="diff-bar-fill medium" id="leetcode-medium-bar" style="width: 4.1%"></div>
               </div>
             </div>
 
@@ -418,12 +590,65 @@
             <div class="difficulty-item">
               <div class="difficulty-meta">
                 <span class="diff-title hard">Hard</span>
-                <span class="diff-nums"><span id="leetcode-hard-solved">0</span><span class="diff-slash">/</span><span class="diff-total" id="leetcode-hard-total">--</span></span>
+                <span class="diff-nums"><span id="leetcode-hard-solved">3</span><span class="diff-slash">/</span><span class="diff-total" id="leetcode-hard-total">740</span></span>
               </div>
               <div class="diff-bar-bg">
-                <div class="diff-bar-fill hard" id="leetcode-hard-bar" style="width: 0%"></div>
+                <div class="diff-bar-fill hard" id="leetcode-hard-bar" style="width: 0.4%"></div>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Badges Section (Matched to Image 3) -->
+      <div class="lc-badges-wrapper">
+        <h4 class="lc-badges-title">BADGES</h4>
+        <div class="lc-badges-grid">
+          <div class="hex-badge-card">
+            <div class="hex-icon dark-hex">
+              <span>50</span>
+              <small>badge</small>
+            </div>
+            <span class="hex-label">Problems Solved</span>
+          </div>
+
+          <div class="hex-badge-card">
+            <div class="hex-icon blue-hex">
+              <span>100</span>
+              <small>badge</small>
+            </div>
+            <span class="hex-label">Problems Solved</span>
+          </div>
+
+          <div class="hex-badge-card">
+            <div class="hex-icon teal-hex">
+              <span>3</span>
+              <small>streak</small>
+            </div>
+            <span class="hex-label">3 Days Streak</span>
+          </div>
+
+          <div class="hex-badge-card">
+            <div class="hex-icon teal-hex">
+              <span>7</span>
+              <small>streak</small>
+            </div>
+            <span class="hex-label">7 Days Streak</span>
+          </div>
+
+          <div class="hex-badge-card">
+            <div class="hex-icon orange-hex">
+              <span>30</span>
+              <small>streak</small>
+            </div>
+            <span class="hex-label">30 Days Streak</span>
+          </div>
+
+          <div class="hex-badge-card">
+            <div class="hex-icon gold-hex">
+              <i class="fas fa-chess-knight"></i>
+            </div>
+            <span class="hex-label">Knight 1900+ Rating</span>
           </div>
         </div>
       </div>
@@ -433,6 +658,87 @@
         <a href="https://leetcode.com/u/Thaara06/" target="_blank" class="btn btn-primary">
           View Profile on LeetCode <i class="fas fa-arrow-right"></i>
         </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Resume Section (Image 5 Layout: 3 Columns) -->
+  <section class="section" id="resume">
+    <div class="section-subtitle-tag">MY RESUME</div>
+    <h2 class="section-title reveal">Resume</h2>
+    <p class="section-desc-center reveal">A quick overview of my professional journey</p>
+
+    <div class="resume-3col-grid reveal">
+      <!-- Column 1: Document Preview Card -->
+      <div class="resume-doc-card glass-card">
+        <div class="doc-header">
+          <h3>THAARANYA SHREE</h3>
+          <p class="doc-subtitle">GenAI Engineer | ML Enthusiast | Java Developer</p>
+        </div>
+        
+        <div class="doc-section">
+          <h4>EDUCATION</h4>
+          <p><strong>B.E. Computer Science and Engineering</strong></p>
+          <p>Nandha Engineering College, Erode</p>
+          <p class="doc-date-cgpa">2023 - 2027 | CGPA: 8.45/10</p>
+        </div>
+
+        <div class="doc-section">
+          <h4>SKILLS</h4>
+          <ul class="doc-skills-list">
+            <li><strong>Programming:</strong> Java, Python, C++, JavaScript</li>
+            <li><strong>AI / ML:</strong> TensorFlow, PyTorch, Scikit-learn</li>
+            <li><strong>Web:</strong> React, Node.js, Express, MongoDB</li>
+            <li><strong>Tools:</strong> Git, Docker, VS Code, AWS</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Column 2: Resume Highlights -->
+      <div class="resume-highlights-card glass-card">
+        <h3>Resume Highlights</h3>
+        <ul class="highlights-list">
+          <li>
+            <i class="fas fa-gem highlight-icon"></i>
+            <span>2+ Years of Learning &amp; Building</span>
+          </li>
+          <li>
+            <i class="fas fa-gem highlight-icon"></i>
+            <span>10+ Projects Completed</span>
+          </li>
+          <li>
+            <i class="fas fa-gem highlight-icon"></i>
+            <span>Strong Problem-solving Skills</span>
+          </li>
+          <li>
+            <i class="fas fa-gem highlight-icon"></i>
+            <span>Passionate about GenAI</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Column 3: Download My Resume -->
+      <div class="resume-download-card glass-card">
+        <h3>Download My Resume</h3>
+        <p>Get a detailed view of my experience, projects and skills.</p>
+        
+        <div class="resume-btn-group">
+          <a href="#" onclick="showToast('Resume PDF will download shortly', 'info'); return false;" class="btn btn-primary resume-orange-btn">
+            <i class="fas fa-download"></i> Download PDF
+          </a>
+          <a href="#" onclick="showToast('Opening Resume viewer...', 'info'); return false;" class="btn btn-secondary resume-outline-btn">
+            <i class="fas fa-expand"></i> View Fullscreen
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Find Me Strip -->
+    <div class="find-me-strip reveal">
+      <span class="find-me-label">Find me:</span>
+      <div class="find-me-links">
+        <a href="https://www.linkedin.com/in/thaaranyaashree-s-8b38212a3" target="_blank" class="find-me-btn linkedin-btn" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="mailto:thaaranyaashree@gmail.com" class="find-me-btn email-btn" title="Email"><i class="fas fa-envelope"></i></a>
       </div>
     </div>
   </section>

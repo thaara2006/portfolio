@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initTypewriter();
   initScrollReveal();
   initLeetCodeStats();
+  initProjectFilter();
 });
 
 /* Theme Toggle Logic */
@@ -18,21 +19,25 @@ function initTheme() {
   document.documentElement.setAttribute('data-theme', savedTheme);
   updateThemeIcon(savedTheme);
 
-  themeToggle.addEventListener('click', () => {
-    const currentTheme = document.documentElement.getAttribute('data-theme');
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    
-    document.documentElement.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-    updateThemeIcon(newTheme);
-    showToast(`Switched to ${newTheme === 'dark' ? 'Dark' : 'Light'} Mode`, 'info');
-  });
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateThemeIcon(newTheme);
+      showToast(`Switched to ${newTheme === 'dark' ? 'Dark' : 'Light'} Mode`, 'info');
+    });
+  }
 
   function updateThemeIcon(theme) {
-    if (theme === 'dark') {
-      themeIcon.className = 'fas fa-sun';
-    } else {
-      themeIcon.className = 'fas fa-moon';
+    if (themeIcon) {
+      if (theme === 'dark') {
+        themeIcon.className = 'fas fa-sun';
+      } else {
+        themeIcon.className = 'fas fa-moon';
+      }
     }
   }
 }
@@ -43,30 +48,34 @@ function initMobileMenu() {
   const navMenu = document.getElementById('nav-menu');
   const navLinks = document.querySelectorAll('.nav-link');
 
-  hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    navMenu.classList.toggle('active');
-  });
-
-  navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      hamburger.classList.remove('active');
-      navMenu.classList.remove('active');
+  if (hamburger && navMenu) {
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navMenu.classList.toggle('active');
     });
-  });
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+      });
+    });
+  }
 }
 
 /* Header Scroll Class Trigger */
 function initHeaderScroll() {
   const header = document.getElementById('header');
   
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-      header.classList.add('scrolled');
-    } else {
-      header.classList.remove('scrolled');
-    }
-  });
+  if (header) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+  }
 }
 
 /* Active Nav Links on Scroll */
@@ -78,7 +87,7 @@ function initActiveNavLinkOnScroll() {
     let currentSectionId = '';
     
     sections.forEach(section => {
-      const sectionTop = section.offsetTop - 150;
+      const sectionTop = section.offsetTop - 180;
       const sectionHeight = section.clientHeight;
       if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
         currentSectionId = section.getAttribute('id');
@@ -101,6 +110,8 @@ function initTypewriter() {
   let charIndex = 0;
   let isDeleting = false;
   const typedTextSpan = document.getElementById('typed-text');
+  if (!typedTextSpan) return;
+
   const typingSpeed = 100;
   const deletingSpeed = 50;
   const delayBetweenWords = 2000;
@@ -120,17 +131,16 @@ function initTypewriter() {
 
     if (!isDeleting && charIndex === currentWord.length) {
       isDeleting = true;
-      nextSpeed = delayBetweenWords; // Pause at end of word
+      nextSpeed = delayBetweenWords;
     } else if (isDeleting && charIndex === 0) {
       isDeleting = false;
       wordIndex = (wordIndex + 1) % words.length;
-      nextSpeed = 500; // Pause before typing next word
+      nextSpeed = 500;
     }
 
     setTimeout(type, nextSpeed);
   }
 
-  // Start typing loop
   setTimeout(type, 500);
 }
 
@@ -170,12 +180,46 @@ function initScrollReveal() {
   });
 }
 
+/* Project Filter Functionality */
+function initProjectFilter() {
+  const filterBtns = document.querySelectorAll('.filter-tab');
+  const projectCards = document.querySelectorAll('.project-card[data-category]');
+
+  if (!filterBtns.length || !projectCards.length) return;
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filterVal = btn.getAttribute('data-filter');
+
+      projectCards.forEach(card => {
+        const category = card.getAttribute('data-category');
+        if (filterVal === 'all' || filterVal === category) {
+          card.style.display = 'flex';
+          setTimeout(() => {
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+          }, 50);
+        } else {
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(20px)';
+          setTimeout(() => {
+            card.style.display = 'none';
+          }, 300);
+        }
+      });
+    });
+  });
+}
 
 /* Custom Floating Toast Notification System */
 function showToast(message, type = 'success') {
   const container = document.getElementById('toast-container');
+  if (!container) return;
+
   const toast = document.createElement('div');
-  
   toast.className = 'toast';
   
   let iconClass = 'fas fa-check-circle';
@@ -188,15 +232,12 @@ function showToast(message, type = 'success') {
   }
 
   toast.innerHTML = `<i class="${iconClass}"></i><span>${message}</span>`;
-  
   container.appendChild(toast);
   
-  // Trigger transition
   setTimeout(() => {
     toast.classList.add('show');
   }, 100);
 
-  // Auto remove toast
   setTimeout(() => {
     toast.classList.remove('show');
     setTimeout(() => {
@@ -226,7 +267,6 @@ function initLeetCodeStats() {
     progressCircle: document.getElementById('leetcode-progress-circle')
   };
 
-  // Base snapshot statistics for immediate loading
   const staticStats = {
     name: "Thaaranyaashree S",
     username: "Thaara06",
@@ -242,15 +282,12 @@ function initLeetCodeStats() {
     acceptanceRate: "59.0%"
   };
 
-  // Render initial static values
   updateStatsDOM(staticStats, 'Archive Mode');
 
-  // Asynchronously fetch live stats from the Render public instance
   const username = "Thaara06";
   const profileUrl = `https://alfa-leetcode-api.onrender.com/${username}`;
   const solvedUrl = `https://alfa-leetcode-api.onrender.com/${username}/solved`;
 
-  // Timeout helper to prevent hanging requests
   const fetchWithTimeout = (url, options = {}, timeout = 8000) => {
     return Promise.race([
       fetch(url, options),
@@ -258,7 +295,6 @@ function initLeetCodeStats() {
     ]);
   };
 
-  // Start background sync
   Promise.all([
     fetchWithTimeout(profileUrl).then(res => {
       if (!res.ok) throw new Error('Profile fetch failed');
@@ -270,12 +306,10 @@ function initLeetCodeStats() {
     })
   ])
   .then(([profileData, solvedData]) => {
-    // If successful, construct updated stats object
     const easyTotal = 830;
     const mediumTotal = 1720;
     const hardTotal = 740;
 
-    // Calculate acceptance rate from submissions
     let acceptanceRate = staticStats.acceptanceRate;
     if (solvedData.acSubmissionNum && solvedData.totalSubmissionNum) {
       const acAll = solvedData.acSubmissionNum.find(x => x.difficulty === 'All');
@@ -300,57 +334,54 @@ function initLeetCodeStats() {
       acceptanceRate: acceptanceRate
     };
 
-    // Update DOM with live sync stats
     updateStatsDOM(liveStats, 'Live Sync');
   })
   .catch(err => {
     console.warn("LeetCode dynamic API fetch failed, remaining in archive mode:", err);
-    // Keep archive mode
     updateStatsDOM(staticStats, 'Archive Mode');
   });
 
   function updateStatsDOM(stats, mode) {
     if (!elements.solvedCount) return;
 
-    // Update text content
-    if (stats.avatar) elements.avatar.src = stats.avatar;
-    if (stats.name) elements.name.textContent = stats.name;
-    if (stats.ranking) elements.rank.innerHTML = `<i class="fas fa-trophy"></i> Rank: ${stats.ranking.toLocaleString()}`;
-    elements.solvedCount.textContent = stats.solved;
-    elements.acceptance.textContent = stats.acceptanceRate;
+    if (stats.avatar && elements.avatar) elements.avatar.src = stats.avatar;
+    if (stats.name && elements.name) elements.name.textContent = stats.name;
+    if (stats.ranking && elements.rank) elements.rank.innerHTML = `<i class="fas fa-trophy"></i> Rank: ${stats.ranking.toLocaleString()}`;
+    if (elements.solvedCount) elements.solvedCount.textContent = stats.solved;
+    if (elements.acceptance) elements.acceptance.textContent = stats.acceptanceRate;
 
-    elements.easySolved.textContent = stats.easySolved;
-    elements.easyTotal.textContent = stats.easyTotal;
-    elements.mediumSolved.textContent = stats.mediumSolved;
-    elements.mediumTotal.textContent = stats.mediumTotal;
-    elements.hardSolved.textContent = stats.hardSolved;
-    elements.hardTotal.textContent = stats.hardTotal;
+    if (elements.easySolved) elements.easySolved.textContent = stats.easySolved;
+    if (elements.easyTotal) elements.easyTotal.textContent = stats.easyTotal;
+    if (elements.mediumSolved) elements.mediumSolved.textContent = stats.mediumSolved;
+    if (elements.mediumTotal) elements.mediumTotal.textContent = stats.mediumTotal;
+    if (elements.hardSolved) elements.hardSolved.textContent = stats.hardSolved;
+    if (elements.hardTotal) elements.hardTotal.textContent = stats.hardTotal;
 
-    // Trigger transitions with setTimeout to allow browser layout calculation
     setTimeout(() => {
-      // Progress Bars
-      elements.easyBar.style.width = `${(stats.easySolved / stats.easyTotal) * 100}%`;
-      elements.mediumBar.style.width = `${(stats.mediumSolved / stats.mediumTotal) * 100}%`;
-      elements.hardBar.style.width = `${(stats.hardSolved / stats.hardTotal) * 100}%`;
+      if (elements.easyBar) elements.easyBar.style.width = `${(stats.easySolved / stats.easyTotal) * 100}%`;
+      if (elements.mediumBar) elements.mediumBar.style.width = `${(stats.mediumSolved / stats.mediumTotal) * 100}%`;
+      if (elements.hardBar) elements.hardBar.style.width = `${(stats.hardSolved / stats.hardTotal) * 100}%`;
 
-      // Circular progress path length calculation (radius is 54, circumference is 2 * pi * r ≈ 339.292)
       const r = 54;
       const circumference = 2 * Math.PI * r;
       const totalQuestions = stats.easyTotal + stats.mediumTotal + stats.hardTotal;
       const solvedRatio = Math.min(stats.solved / totalQuestions, 1);
       const dashoffset = circumference - (solvedRatio * circumference);
       
-      elements.progressCircle.style.strokeDasharray = `${circumference}`;
-      elements.progressCircle.style.strokeDashoffset = `${dashoffset}`;
+      if (elements.progressCircle) {
+        elements.progressCircle.style.strokeDasharray = `${circumference}`;
+        elements.progressCircle.style.strokeDashoffset = `${dashoffset}`;
+      }
     }, 150);
 
-    // Update Sync Badge
-    if (mode === 'Live Sync') {
-      elements.syncStatus.className = 'sync-status online';
-      elements.syncStatus.innerHTML = '<span class="status-dot"></span> <span class="status-text">Live Sync</span>';
-    } else {
-      elements.syncStatus.className = 'sync-status offline';
-      elements.syncStatus.innerHTML = '<span class="status-dot"></span> <span class="status-text">Archive Mode</span>';
+    if (elements.syncStatus) {
+      if (mode === 'Live Sync') {
+        elements.syncStatus.className = 'sync-status online';
+        elements.syncStatus.innerHTML = '<span class="status-dot"></span> <span class="status-text">Live Sync</span>';
+      } else {
+        elements.syncStatus.className = 'sync-status offline';
+        elements.syncStatus.innerHTML = '<span class="status-dot"></span> <span class="status-text">Archive Mode</span>';
+      }
     }
   }
 }
