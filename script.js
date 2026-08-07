@@ -14,7 +14,6 @@ function initTheme() {
   const themeToggle = document.getElementById('theme-toggle');
   const themeIcon = document.getElementById('theme-icon');
   
-  // Check user preference in localStorage, default to dark
   const savedTheme = localStorage.getItem('theme') || 'dark';
   document.documentElement.setAttribute('data-theme', savedTheme);
   updateThemeIcon(savedTheme);
@@ -246,7 +245,7 @@ function showToast(message, type = 'success') {
   }, 4000);
 }
 
-/* LeetCode Dynamic Stats Integration */
+/* LeetCode Dynamic Real-Time Live Stats Integration */
 function initLeetCodeStats() {
   const elements = {
     avatar: document.getElementById('leetcode-avatar'),
@@ -264,30 +263,43 @@ function initLeetCodeStats() {
     hardSolved: document.getElementById('leetcode-hard-solved'),
     hardTotal: document.getElementById('leetcode-hard-total'),
     hardBar: document.getElementById('leetcode-hard-bar'),
-    progressCircle: document.getElementById('leetcode-progress-circle')
+    progressCircle: document.getElementById('leetcode-progress-circle'),
+    badgesContainer: document.getElementById('leetcode-badges-container'),
+    heroLeetCodeCount: document.getElementById('hero-leetcode-count')
   };
-
-  const staticStats = {
-    name: "Thaaranyaashree S",
-    username: "Thaara06",
-    avatar: "https://assets.leetcode.com/users/Thaara06/avatar_1758620144.png",
-    ranking: 346295,
-    solved: 371,
-    easySolved: 297,
-    mediumSolved: 71,
-    hardSolved: 3,
-    easyTotal: 830,
-    mediumTotal: 1720,
-    hardTotal: 740,
-    acceptanceRate: "59.0%"
-  };
-
-  updateStatsDOM(staticStats, 'Archive Mode');
 
   const username = "Thaara06";
-  const profileUrl = `https://alfa-leetcode-api.onrender.com/${username}`;
-  const solvedUrl = `https://alfa-leetcode-api.onrender.com/${username}/solved`;
 
+  // Base snapshot statistics for instant display
+  const staticStats = {
+    name: "Thaaranyaashree S",
+    username: username,
+    avatar: "https://assets.leetcode.com/users/Thaara06/avatar_1758620144.png",
+    ranking: 316662,
+    solved: 395,
+    easySolved: 317,
+    mediumSolved: 75,
+    hardSolved: 3,
+    easyTotal: 958,
+    mediumTotal: 2095,
+    hardTotal: 960,
+    acceptanceRate: "59.1%",
+    streak: 36,
+    totalActiveDays: 157,
+    badges: [
+      { name: "50 Problems Solved", class: "dark-hex", val: "50", sub: "badge" },
+      { name: "100 Problems Solved", class: "blue-hex", val: "100", sub: "badge" },
+      { name: "36 Days Streak", class: "teal-hex", val: "36", sub: "streak" },
+      { name: "157 Active Days", class: "orange-hex", val: "157", sub: "days" },
+      { name: "100 Days Badge 2026", class: "gold-hex", val: "100", sub: "badge" },
+      { name: "Knight Rating", class: "gold-hex", icon: "fas fa-chess-knight" }
+    ]
+  };
+
+  // Render initial static snapshot values immediately
+  updateStatsDOM(staticStats, 'Archive Mode');
+
+  // Timeout helper to prevent hanging API calls
   const fetchWithTimeout = (url, options = {}, timeout = 8000) => {
     return Promise.race([
       fetch(url, options),
@@ -295,49 +307,94 @@ function initLeetCodeStats() {
     ]);
   };
 
+  // Live Sync Promise: Fetch from Faisal Shohag API & LeetCode GraphQL
+  const faisalUrl = `https://leetcode-api-faisalshohag.vercel.app/${username}`;
+  
+  const graphQLQuery = `
+    query getUserProfile($username: String!) {
+      matchedUser(username: $username) {
+        username
+        profile {
+          realName
+          userAvatar
+          ranking
+        }
+        badges {
+          id
+          displayName
+          icon
+        }
+        userCalendar {
+          streak
+          totalActiveDays
+        }
+      }
+    }
+  `;
+
   Promise.all([
-    fetchWithTimeout(profileUrl).then(res => {
-      if (!res.ok) throw new Error('Profile fetch failed');
+    fetchWithTimeout(faisalUrl).then(res => {
+      if (!res.ok) throw new Error('Faisal API network response was not ok');
       return res.json();
+    }).catch(err => {
+      console.warn("Faisal API fetch failed, falling back:", err.message);
+      return null;
     }),
-    fetchWithTimeout(solvedUrl).then(res => {
-      if (!res.ok) throw new Error('Solved stats fetch failed');
+
+    fetchWithTimeout('https://leetcode.com/graphql', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Referer': 'https://leetcode.com' },
+      body: JSON.stringify({ query: graphQLQuery, variables: { username } })
+    }).then(res => {
+      if (!res.ok) throw new Error('GraphQL response not ok');
       return res.json();
+    }).catch(err => {
+      console.warn("LeetCode GraphQL fetch failed:", err.message);
+      return null;
     })
   ])
-  .then(([profileData, solvedData]) => {
-    const easyTotal = 830;
-    const mediumTotal = 1720;
-    const hardTotal = 740;
+  .then(([faisalData, gqlData]) => {
+    const liveStats = { ...staticStats };
 
-    let acceptanceRate = staticStats.acceptanceRate;
-    if (solvedData.acSubmissionNum && solvedData.totalSubmissionNum) {
-      const acAll = solvedData.acSubmissionNum.find(x => x.difficulty === 'All');
-      const subAll = solvedData.totalSubmissionNum.find(x => x.difficulty === 'All');
-      if (acAll && subAll && subAll.submissions > 0) {
-        acceptanceRate = ((acAll.submissions / subAll.submissions) * 100).toFixed(1) + '%';
+    if (faisalData) {
+      if (faisalData.totalSolved !== undefined) liveStats.solved = faisalData.totalSolved;
+      if (faisalData.easySolved !== undefined) liveStats.easySolved = faisalData.easySolved;
+      if (faisalData.mediumSolved !== undefined) liveStats.mediumSolved = faisalData.mediumSolved;
+      if (faisalData.hardSolved !== undefined) liveStats.hardSolved = faisalData.hardSolved;
+      if (faisalData.totalEasy) liveStats.easyTotal = faisalData.totalEasy;
+      if (faisalData.totalMedium) liveStats.mediumTotal = faisalData.totalMedium;
+      if (faisalData.totalHard) liveStats.hardTotal = faisalData.totalHard;
+      if (faisalData.ranking) liveStats.ranking = faisalData.ranking;
+
+      if (faisalData.matchedUserStats && faisalData.matchedUserStats.acSubmissionNum) {
+        const acAll = faisalData.matchedUserStats.acSubmissionNum.find(x => x.difficulty === 'All');
+        const subAll = faisalData.matchedUserStats.totalSubmissionNum.find(x => x.difficulty === 'All');
+        if (acAll && subAll && subAll.submissions > 0) {
+          liveStats.acceptanceRate = ((acAll.submissions / subAll.submissions) * 100).toFixed(1) + '%';
+        }
       }
     }
 
-    const liveStats = {
-      name: profileData.name || staticStats.name,
-      username: username,
-      avatar: profileData.avatar || staticStats.avatar,
-      ranking: profileData.ranking || staticStats.ranking,
-      solved: solvedData.solvedProblem || staticStats.solved,
-      easySolved: solvedData.easySolved || staticStats.easySolved,
-      mediumSolved: solvedData.mediumSolved || staticStats.mediumSolved,
-      hardSolved: solvedData.hardSolved || staticStats.hardSolved,
-      easyTotal: easyTotal,
-      mediumTotal: mediumTotal,
-      hardTotal: hardTotal,
-      acceptanceRate: acceptanceRate
-    };
+    if (gqlData && gqlData.data && gqlData.data.matchedUser) {
+      const user = gqlData.data.matchedUser;
+      if (user.profile) {
+        if (user.profile.userAvatar) liveStats.avatar = user.profile.userAvatar;
+        if (user.profile.realName) liveStats.name = user.profile.realName;
+        if (user.profile.ranking) liveStats.ranking = user.profile.ranking;
+      }
+      if (user.userCalendar) {
+        if (user.userCalendar.streak) liveStats.streak = user.userCalendar.streak;
+        if (user.userCalendar.totalActiveDays) liveStats.totalActiveDays = user.userCalendar.totalActiveDays;
+      }
+      if (user.badges && user.badges.length) {
+        liveStats.gqlBadges = user.badges;
+      }
+    }
 
     updateStatsDOM(liveStats, 'Live Sync');
   })
   .catch(err => {
-    console.warn("LeetCode dynamic API fetch failed, remaining in archive mode:", err);
+    console.warn("LeetCode live sync encountered issues, using static snapshot:", err);
     updateStatsDOM(staticStats, 'Archive Mode');
   });
 
@@ -349,6 +406,10 @@ function initLeetCodeStats() {
     if (stats.ranking && elements.rank) elements.rank.innerHTML = `<i class="fas fa-trophy"></i> Rank: ${stats.ranking.toLocaleString()}`;
     if (elements.solvedCount) elements.solvedCount.textContent = stats.solved;
     if (elements.acceptance) elements.acceptance.textContent = stats.acceptanceRate;
+
+    if (elements.heroLeetCodeCount) {
+      elements.heroLeetCodeCount.textContent = `${stats.solved}+`;
+    }
 
     if (elements.easySolved) elements.easySolved.textContent = stats.easySolved;
     if (elements.easyTotal) elements.easyTotal.textContent = stats.easyTotal;
@@ -374,6 +435,12 @@ function initLeetCodeStats() {
       }
     }, 150);
 
+    // Update Badges Grid dynamically
+    if (elements.badgesContainer) {
+      renderBadges(stats);
+    }
+
+    // Update Live Sync Badge
     if (elements.syncStatus) {
       if (mode === 'Live Sync') {
         elements.syncStatus.className = 'sync-status online';
@@ -383,5 +450,48 @@ function initLeetCodeStats() {
         elements.syncStatus.innerHTML = '<span class="status-dot"></span> <span class="status-text">Archive Mode</span>';
       }
     }
+  }
+
+  function renderBadges(stats) {
+    if (!elements.badgesContainer) return;
+
+    let html = '';
+
+    // If GraphQL returned live badges with icons
+    if (stats.gqlBadges && stats.gqlBadges.length > 0) {
+      stats.gqlBadges.forEach(b => {
+        html += `
+          <div class="hex-badge-card">
+            <div class="hex-icon blue-hex" style="background: linear-gradient(135deg, #0284c7, #0f766e);">
+              <img src="${b.icon}" alt="${b.displayName}" style="width: 38px; height: 38px; object-fit: contain;" />
+            </div>
+            <span class="hex-label">${b.displayName}</span>
+          </div>
+        `;
+      });
+    }
+
+    // Always include milestone badges & streak badge
+    const defaultBadges = [
+      { name: "50 Problems Solved", class: "dark-hex", val: "50", sub: "badge" },
+      { name: "100 Problems Solved", class: "blue-hex", val: "100", sub: "badge" },
+      { name: `${stats.streak || 36} Days Streak`, class: "teal-hex", val: `${stats.streak || 36}`, sub: "streak" },
+      { name: `${stats.totalActiveDays || 157} Active Days`, class: "orange-hex", val: `${stats.totalActiveDays || 157}`, sub: "days" },
+      { name: "Knight 1900+ Rating", class: "gold-hex", icon: "fas fa-chess-knight" }
+    ];
+
+    defaultBadges.forEach(b => {
+      let iconInner = b.icon ? `<i class="${b.icon}"></i>` : `<span>${b.val}</span><small>${b.sub}</small>`;
+      html += `
+        <div class="hex-badge-card">
+          <div class="hex-icon ${b.class}">
+            ${iconInner}
+          </div>
+          <span class="hex-label">${b.name}</span>
+        </div>
+      `;
+    });
+
+    elements.badgesContainer.innerHTML = html;
   }
 }
