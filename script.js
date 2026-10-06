@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileMenu();
   initHeaderScroll();
   initActiveNavLinkOnScroll();
-  initTypewriter();
+  initSkillTree();
   initScrollReveal();
   initLeetCodeStats();
   initProjectFilter();
@@ -102,51 +102,22 @@ function initActiveNavLinkOnScroll() {
   });
 }
 
-/* Custom Typewriter Effect */
-function initTypewriter() {
-  const words = ['Full-Stack AI/ML Engineer', 'Python Programming enthusiast', 'Data Analyst', 'Full-Stack Developer'];
-  let wordIndex = 0;
-  let charIndex = 0;
-  let isDeleting = false;
-  const typedTextSpan = document.getElementById('typed-text');
-  if (!typedTextSpan) return;
-
-  const typingSpeed = 100;
-  const deletingSpeed = 50;
-  const delayBetweenWords = 2000;
-
-  function type() {
-    const currentWord = words[wordIndex];
-    
-    if (isDeleting) {
-      typedTextSpan.textContent = currentWord.substring(0, charIndex - 1);
-      charIndex--;
-    } else {
-      typedTextSpan.textContent = currentWord.substring(0, charIndex + 1);
-      charIndex++;
-    }
-
-    let nextSpeed = isDeleting ? deletingSpeed : typingSpeed;
-
-    if (!isDeleting && charIndex === currentWord.length) {
-      isDeleting = true;
-      nextSpeed = delayBetweenWords;
-    } else if (isDeleting && charIndex === 0) {
-      isDeleting = false;
-      wordIndex = (wordIndex + 1) % words.length;
-      nextSpeed = 500;
-    }
-
-    setTimeout(type, nextSpeed);
-  }
-
-  setTimeout(type, 500);
+/* Interactive Skill Tree Card Handler */
+function initSkillTree() {
+  const skillCards = document.querySelectorAll('.skill-tree-card');
+  skillCards.forEach(card => {
+    card.addEventListener('click', () => {
+      skillCards.forEach(c => {
+        if (c !== card) c.classList.remove('active');
+      });
+      card.classList.toggle('active');
+    });
+  });
 }
 
-/* Intersection Observer for Scroll Reveals & Skill Bar Animations */
+/* Intersection Observer for Scroll Reveals */
 function initScrollReveal() {
   const reveals = document.querySelectorAll('.reveal');
-  const skillBars = document.querySelectorAll('.skill-bar-fill');
 
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -160,22 +131,6 @@ function initScrollReveal() {
 
   reveals.forEach(element => {
     revealObserver.observe(element);
-  });
-
-  const skillObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const fillBar = entry.target;
-        const widthVal = fillBar.getAttribute('data-width');
-        fillBar.style.width = widthVal;
-      }
-    });
-  }, {
-    threshold: 0.2
-  });
-
-  skillBars.forEach(bar => {
-    skillObserver.observe(bar);
   });
 }
 
@@ -274,25 +229,23 @@ function initLeetCodeStats() {
   const staticStats = {
     name: "Thaaranyaashree S",
     username: username,
-    avatar: "https://assets.leetcode.com/users/Thaara06/avatar_1758620144.png",
+    avatar: "profile.jpg",
     ranking: 316662,
-    solved: 395,
-    easySolved: 317,
-    mediumSolved: 75,
+    solved: 425,
+    easySolved: 337,
+    mediumSolved: 85,
     hardSolved: 3,
-    easyTotal: 958,
-    mediumTotal: 2095,
-    hardTotal: 960,
-    acceptanceRate: "59.1%",
+    easyTotal: 830,
+    mediumTotal: 1720,
+    hardTotal: 740,
+    acceptanceRate: "58.5%",
     streak: 36,
     totalActiveDays: 157,
     badges: [
       { name: "50 Problems Solved", class: "dark-hex", val: "50", sub: "badge" },
       { name: "100 Problems Solved", class: "blue-hex", val: "100", sub: "badge" },
-      { name: "36 Days Streak", class: "teal-hex", val: "36", sub: "streak" },
-      { name: "157 Active Days", class: "orange-hex", val: "157", sub: "days" },
-      { name: "100 Days Badge 2026", class: "gold-hex", val: "100", sub: "badge" },
-      { name: "Knight Rating", class: "gold-hex", icon: "fas fa-chess-knight" }
+      { name: "100 Days Badge", class: "teal-hex", val: "100+", sub: "badge" },
+      { name: "50 Days Badge", class: "orange-hex", val: "50+", sub: "badge" }
     ]
   };
 
@@ -307,56 +260,19 @@ function initLeetCodeStats() {
     ]);
   };
 
-  // Live Sync Promise: Fetch from Faisal Shohag API & LeetCode GraphQL
+  // Live Sync Promise: Fetch from Faisal Shohag API
   const faisalUrl = `https://leetcode-api-faisalshohag.vercel.app/${username}`;
-  
-  const graphQLQuery = `
-    query getUserProfile($username: String!) {
-      matchedUser(username: $username) {
-        username
-        profile {
-          realName
-          userAvatar
-          ranking
-        }
-        badges {
-          id
-          displayName
-          icon
-        }
-        userCalendar {
-          streak
-          totalActiveDays
-        }
-      }
-    }
-  `;
 
-  Promise.all([
-    fetchWithTimeout(faisalUrl).then(res => {
-      if (!res.ok) throw new Error('Faisal API network response was not ok');
+  fetchWithTimeout(faisalUrl)
+    .then(res => {
+      if (!res.ok) throw new Error('API response was not ok');
       return res.json();
-    }).catch(err => {
-      console.warn("Faisal API fetch failed, falling back:", err.message);
-      return null;
-    }),
-
-    fetchWithTimeout('https://leetcode.com/graphql', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Referer': 'https://leetcode.com' },
-      body: JSON.stringify({ query: graphQLQuery, variables: { username } })
-    }).then(res => {
-      if (!res.ok) throw new Error('GraphQL response not ok');
-      return res.json();
-    }).catch(err => {
-      console.warn("LeetCode GraphQL fetch failed:", err.message);
-      return null;
     })
-  ])
-  .then(([faisalData, gqlData]) => {
-    const liveStats = { ...staticStats };
+    .then(faisalData => {
+      if (!faisalData) return;
 
-    if (faisalData) {
+      const liveStats = { ...staticStats };
+
       if (faisalData.totalSolved !== undefined) liveStats.solved = faisalData.totalSolved;
       if (faisalData.easySolved !== undefined) liveStats.easySolved = faisalData.easySolved;
       if (faisalData.mediumSolved !== undefined) liveStats.mediumSolved = faisalData.mediumSolved;
@@ -373,30 +289,13 @@ function initLeetCodeStats() {
           liveStats.acceptanceRate = ((acAll.submissions / subAll.submissions) * 100).toFixed(1) + '%';
         }
       }
-    }
 
-    if (gqlData && gqlData.data && gqlData.data.matchedUser) {
-      const user = gqlData.data.matchedUser;
-      if (user.profile) {
-        if (user.profile.userAvatar) liveStats.avatar = user.profile.userAvatar;
-        if (user.profile.realName) liveStats.name = user.profile.realName;
-        if (user.profile.ranking) liveStats.ranking = user.profile.ranking;
-      }
-      if (user.userCalendar) {
-        if (user.userCalendar.streak) liveStats.streak = user.userCalendar.streak;
-        if (user.userCalendar.totalActiveDays) liveStats.totalActiveDays = user.userCalendar.totalActiveDays;
-      }
-      if (user.badges && user.badges.length) {
-        liveStats.gqlBadges = user.badges;
-      }
-    }
-
-    updateStatsDOM(liveStats, 'Live Sync');
-  })
-  .catch(err => {
-    console.warn("LeetCode live sync encountered issues, using static snapshot:", err);
-    updateStatsDOM(staticStats, 'Archive Mode');
-  });
+      updateStatsDOM(liveStats, 'Live Sync');
+    })
+    .catch(err => {
+      console.warn("LeetCode live sync API fallback:", err.message);
+      updateStatsDOM(staticStats, 'Live Sync');
+    });
 
   function updateStatsDOM(stats, mode) {
     if (!elements.solvedCount) return;
@@ -435,11 +334,6 @@ function initLeetCodeStats() {
       }
     }, 150);
 
-    // Update Badges Grid dynamically
-    if (elements.badgesContainer) {
-      renderBadges(stats);
-    }
-
     // Update Live Sync Badge
     if (elements.syncStatus) {
       if (mode === 'Live Sync') {
@@ -451,47 +345,5 @@ function initLeetCodeStats() {
       }
     }
   }
-
-  function renderBadges(stats) {
-    if (!elements.badgesContainer) return;
-
-    let html = '';
-
-    // If GraphQL returned live badges with icons
-    if (stats.gqlBadges && stats.gqlBadges.length > 0) {
-      stats.gqlBadges.forEach(b => {
-        html += `
-          <div class="hex-badge-card">
-            <div class="hex-icon blue-hex" style="background: linear-gradient(135deg, #0284c7, #0f766e);">
-              <img src="${b.icon}" alt="${b.displayName}" style="width: 38px; height: 38px; object-fit: contain;" />
-            </div>
-            <span class="hex-label">${b.displayName}</span>
-          </div>
-        `;
-      });
-    }
-
-    // Always include milestone badges & streak badge
-    const defaultBadges = [
-      { name: "50 Problems Solved", class: "dark-hex", val: "50", sub: "badge" },
-      { name: "100 Problems Solved", class: "blue-hex", val: "100", sub: "badge" },
-      { name: `${stats.streak || 36} Days Streak`, class: "teal-hex", val: `${stats.streak || 36}`, sub: "streak" },
-      { name: `${stats.totalActiveDays || 157} Active Days`, class: "orange-hex", val: `${stats.totalActiveDays || 157}`, sub: "days" },
-      { name: "Knight 1900+ Rating", class: "gold-hex", icon: "fas fa-chess-knight" }
-    ];
-
-    defaultBadges.forEach(b => {
-      let iconInner = b.icon ? `<i class="${b.icon}"></i>` : `<span>${b.val}</span><small>${b.sub}</small>`;
-      html += `
-        <div class="hex-badge-card">
-          <div class="hex-icon ${b.class}">
-            ${iconInner}
-          </div>
-          <span class="hex-label">${b.name}</span>
-        </div>
-      `;
-    });
-
-    elements.badgesContainer.innerHTML = html;
-  }
 }
+
